@@ -13,12 +13,16 @@ export default function Metrics() {
     <section className="relative min-h-screen w-full overflow-hidden">
       <video src={VIDEOS.metrics} autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
 
+      {/* mesma sombra de contraste do Hero — em telas estreitas o vídeo corta mais fechado e
+          pode deixar os números difíceis de ler contra um trecho claro do fundo. */}
+      <div className="pointer-events-none absolute inset-0 bg-black/40" />
+
       <div className="relative z-10 mx-auto max-w-6xl px-6 pb-32 pt-32">
         <motion.p
           className="mb-20 text-center text-[13px] uppercase tracking-[0.2em] text-white/40 sm:text-[14px]"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 1.2 }}
         >
           Em Números
@@ -31,7 +35,7 @@ export default function Metrics() {
               className="text-center"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.15, margin: '0px 0px 200px 0px' }}
               transition={{ duration: 0.8, delay: i * 0.15 }}
             >
               <div className="text-[clamp(48px,10vw,96px)] font-light leading-none tracking-[-0.04em] text-white tabular-nums">

@@ -10,7 +10,9 @@ interface CounterProps {
 /** Número que sobe do zero até o valor final quando entra na tela — dispara uma única vez. */
 export default function Counter({ to, suffix = '', duration = 1600 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  // amount mais baixo + margin positiva: dispara antes do número estar 100% visível, pra não
+  // perder o gatilho num scroll rápido de celular (o pai já cuida do fade-in mais cedo ainda).
+  const inView = useInView(ref, { once: true, amount: 0.2, margin: '0px 0px 200px 0px' });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {

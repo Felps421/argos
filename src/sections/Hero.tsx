@@ -67,6 +67,11 @@ export default function Hero({ entranceComplete }: HeroProps) {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
+      {/* sombra por baixo, só onde o texto fica — sem isso, em telas estreitas o vídeo corta mais
+          fechado (retrato) e às vezes o pelo claro da lhama cai bem atrás do título, quase
+          apagando ele; esse degradê garante contraste em qualquer enquadramento do vídeo. */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 via-40% to-transparent" />
+
       {/* grade de pontos, quase invisível */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
