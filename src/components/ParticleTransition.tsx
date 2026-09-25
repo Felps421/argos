@@ -123,9 +123,12 @@ export default function ParticleTransition() {
     const { data } = octx.getImageData(0, 0, canvas.width, canvas.height);
     const particles = particlesRef.current;
 
-    // Amostragem: controla quantos pixels do texto viram partícula. Maior em telas grandes,
-    // pra não gerar dezenas de milhares de partículas (custa caro no canvas 2D).
-    const step = window.innerWidth < 640 ? 7 : 11;
+    // Amostragem: controla quantos pixels do texto viram partícula. Em celular de verdade (não
+    // a emulação do desktop) o processador é bem mais fraco, e cada partícula custa uma chamada
+    // de fillRect + física por quadro — com poucas partículas de menos ficava pesado a ponto da
+    // tela travar preta durante a transição. Por isso o step no mobile é maior que no desktop,
+    // não menor (menos partículas onde o processador é mais fraco).
+    const step = window.innerWidth < 640 ? 20 : 11;
     const coords: number[] = [];
     for (let i = 0; i < data.length; i += step * 4) coords.push(i);
     for (let i = coords.length - 1; i > 0; i--) {
